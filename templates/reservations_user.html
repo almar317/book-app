@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mes réservations</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 { color: #007bff; margin-bottom: 20px; }
+
+        ul { list-style-type: none; padding: 0; margin: 0; }
+
+        li {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        span { font-weight: bold; }
+
+        .book-img { width: 50px; height: auto; }
+
+        .remove-reservation-btn {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .remove-reservation-btn:hover { background-color: #c82333; }
+
+        .btn-home {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+            display: inline-block;
+        }
+        .btn-home:hover { background-color: #218838; }
+    </style>
+</head>
+<body>
+    <h1>Mes réservations</h1>
+    <ul>
+        {% for reservation in user_reservations %}
+            <li>
+                <img src="{{ reservation.img }}" alt="Image du livre" class="book-img">
+                <span>{{ reservation.title }} - {{ reservation.author }}</span>
+
+        <a href="{{ url_for('confirm_remove_reservation', reservation_id=reservation.reservation_id) }}" class="remove-reservation-btn">
+            Annuler
+        </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <!-- Bouton Accueil -->
+    <a class="btn-home" href="{{ url_for('home') }}">Retour à l'accueil</a>
+</body>
+</html>

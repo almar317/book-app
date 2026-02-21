@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation de suppression de réservation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .confirmation-container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin-bottom: 20px;
+        }
+
+        .btn-confirm {
+            background-color: #dc3545;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn-confirm:hover {
+            background-color: #c82333;
+        }
+
+        .btn-cancel {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+            margin-right: 10px;
+        }
+
+        .btn-cancel:hover {
+            background-color: #0056b3;
+        }
+
+        .btn-home {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-home:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="confirmation-container">
+        <h1>Confirmation de suppression de réservation</h1>
+        <p>Voulez-vous vraiment supprimer cette réservation ?</p>
+        <form action="{{ url_for('remove_reservation_route', reservation_id=reservation_id) }}" method="post">
+            <button type="submit" class="btn-confirm">Confirmer</button>
+            <a class="btn-cancel" href="{{ url_for('my_reservations') }}">Annuler</a>
+        </form>
+    </div>
+</body>
+</html>

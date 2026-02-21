@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>J'aime lire</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  </head>
+
+  <body>
+    <nav class="navbar navbar-expand-md navbar-secondary bg-dark">
+      <a href="/" class="navbar-brand">
+      <button type="button" class="btn btn-outline-light">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16">
+<path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"></path>
+</svg> 
+      </button>
+    </a>
+      
+
+  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      {% if 'user_id' in session %}
+      <li><a href="/search" class="btn btn-outline-primary mr-2">Tous les livres</a></li>
+      <li><a href="/cart" class="btn btn-outline-success mr-2">Panier</a></li>
+      <li><a href="/favorite_book/{{ session['user_id'] }}" class="btn btn-outline-warning mr-2">Liste des Favoris</a></li>
+      <li><a href="/logout" class="btn btn-outline-danger mr-2">Se déconnecter ({{ session['user_name'] }})</a></li>
+      {% else %}
+      <li><a href="/login" class="btn btn-outline-warning mr-2">Se connecter</a></li>
+      <li><a href="/new_user" class="btn btn-outline-info mr-2">S'inscrire</a></li>
+      {% endif %}
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="/search">
+      <input class="form-control mr-sm-2" type="text" placeholder="ENTRER LE LIVRE SOUHAITÉ" name="query" aria-label="Search" value="{{query}}">
+      <input class="btn btn-outline-light my-2 my-sm-0" type="submit" value="Rechercher">
+    </form>
+  </div>
+</nav>
+<style>
+  body {
+    background-color: rgb(60, 63, 74);
+  }
+  </style>
+
+<div class="row">
+  {% for result in found['results'] %}
+  <div class="col mb-3">
+      <div class="card h-100">
+          <a href="/read/{{ result['entry'] }}">
+              <img class="card-img-top" src="{{ result['img'] }}" alt="{{ result['title'] }}">
+          </a>
+          <div class="card-body">
+              <h5 class="card-title">{{ result['title'] }}</h5>
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row">
+  <div class="col">
+      <a class="btn btn-primary" href="/search?query={{ found['query'] }}&page={{ found['next_page'] }}">Page suivante</a>
+  </div>
+</div>

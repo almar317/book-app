@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Favorite Added</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa; /* Fond gris très clair */
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007bff; /* Bleu */
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        a {
+            background-color: #28a745; /* Vert */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #218838; /* Vert foncé au survol */
+        }
+    </style>
+</head>
+<body>
+    <h1>Livre ajouté aux favoris avec succès!</h1>
+    <a href="{{ url_for('home') }}">Retour à la page principale</a>
+</body>
+</html>

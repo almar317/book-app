@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Se connecter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2; /* Fond gris clair */
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007bff; /* Bleu */
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 150px;
+            padding: 10px;
+            background-color: #007bff; /* Bleu */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #0056b3; /* Bleu foncé au survol */
+        }
+    </style>
+</head>
+<body>
+    <h1>Se connecter</h1>
+    <form action="/login" method="post">
+        <input type="text" name="user" placeholder="Nom d'utilisateur">
+        <input type="password" name="password" placeholder="Mot de passe">
+        <input type="submit" value="Se connecter">
+    </form>
+</body>
+</html>

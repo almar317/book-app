@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vos Livres Favoris</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2; /* Fond gris clair */
+            color: #333;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            color: #007bff; /* Bleu */
+            margin-bottom: 20px;
+        }
+
+        .card {
+            margin-bottom: 20px;
+            padding: 20px;
+            background-color: #fff; /* Fond blanc */
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+
+        .card-img {
+            width: 100px; /* Taille de l'image du livre */
+            height: auto; /* Hauteur ajustée automatiquement */
+        }
+
+        .remove-from-favorites-btn {
+            background-color: #007bff; /* Bleu */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .remove-from-favorites-btn:hover {
+            background-color: #0056b3; /* Bleu foncé au survol */
+        }
+        a {
+            background-color: #28a745; /* Vert */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>Vos Livres Favoris</h1>
+    <div class="container">
+        {% if favorite_books %}
+            {% for book in favorite_books %}
+                <div class="card">
+                    <img src="{{ book['img'] }}" alt="{{ book['title'] }}" class="card-img">
+                    <h5>{{ book['title'] }}</h5>
+                    <p>Auteur: {{ book['author'] }}</p>
+                    <p>Prix: {{ book['price'] }} euros</p>
+                    <button class="remove-from-favorites-btn" data-user-id="{{ session['user_id'] }}" data-book-id="{{ book['id'] }}">Supprimer</button>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>Aucun livre en favori.</p>
+        {% endif %}
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        $('.remove-from-favorites-btn').click(function() {
+            var userId = $(this).data('user-id');
+            var bookId = $(this).data('book-id');
+            
+            $.post('/remove_from_favorites', { user_id: userId, book_id: bookId })
+                .done(function(data) {
+                    // Vérifiez si la réponse contient le mot-clé "success"
+                    if (data.includes("success")) {
+                        // Si la réponse indique le succès, chargez la page remove_from_favorite.html
+                        window.location.href = "/remove_from_favorite";
+                    } else {
+                        // Sinon, affichez le message retourné par le serveur
+                        alert(data);
+                    }
+                })
+                .fail(function() {
+                    alert('Livre a éte retirer des favoris');
+                });
+        });
+    });
+    </script>
+    <a href="/" class="btn btn-primary">Retour à la page d'accueil</a>
+</body>
+</html>
